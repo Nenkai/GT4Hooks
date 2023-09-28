@@ -2,6 +2,12 @@
 
 #include "Enums.h"
 
+struct MemorySpace
+{
+    void* BufferPtr;
+    int BufferSize;
+};
+
 struct FileStatus
 {
     FileError Status;
@@ -33,7 +39,7 @@ struct FileObject
   int field_40;
   int field_44;
   /* ID of the name as a handle */
-  int FileDescriptor;
+  int FileNameHandle;
   int Stream;
   int field_50;
   int field_54;
@@ -55,10 +61,12 @@ struct FileObject
   int VTable;
 };
 
-struct MemorySpace
+struct UnitArena
 {
-    void* BufferPtr;
-    int BufferSize;
+    int field_0x00;
+    int Offset;
+    int field_0x08;
+    void* UnkArena;
 };
 
 struct FileInternalStream
@@ -66,10 +74,7 @@ struct FileInternalStream
     int Status;
     struct FileObject* FileObject;
     int unk3;
-    struct FileStat* unk4;
-    int field_0x10;
-    int field_0x14;
-    void* DefaultCallback;
+    struct UnitArena State;
     int field_0x1C;
     int vtable;
 };

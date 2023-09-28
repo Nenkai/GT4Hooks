@@ -47,6 +47,7 @@
         "new": "c",
         "structs.h": "c",
         "functions.h": "c",
-        "hostfs.h": "c"
+        "hostfs.h": "c",
+        "io.h": "c"
     }
 }
