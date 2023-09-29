@@ -29,8 +29,8 @@ void HostFs_InstallHooks()
     HOOK_VTABLE((void*)ADDR_PlayStation2_FileDeviceRo2_GetFileEntry, &HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry);
     HOOK_VTABLE(ADDR_PlayStation2_FileDeviceRo_openStream, &HOOK_HostFs__PlayStation2_FileDeviceRo_openStream);
     HOOK(ADDR_PlayStation2_FileDeviceRo_rawReadStream, HOOK_HostFs__PlayStation2_FileDeviceRo_rawReadStream);
-    HOOK_VTABLE(ADDR_PlayStation2_FileDeviceRo_closeStream, &HOOK_HostFs__PlayStation2_FileDeviceRo_closeStream);
-    HOOK_VTABLE(ADDR_PDISTD_FileDevice_readStream, &HOOK_HostFs__PDISTD_FileDevice_readStream);
+    HOOK_VTABLE((void*)ADDR_PlayStation2_FileDeviceRo_closeStream, &HOOK_HostFs__PlayStation2_FileDeviceRo_closeStream);
+    HOOK_VTABLE((void*)ADDR_PDISTD_FileDevice_readStream, &HOOK_HostFs__PDISTD_FileDevice_readStream);
     //HOOK(ADDR_PlayStation2_FileDeviceRo2_IOControlStream, HOOK_HostFs__PlayStation2_FileDeviceRo_IOControlStream);
     //HOOK(ADDR_PDISTD_FileInternalStream_ioctl, HOOK_HostFs__PDISTD_FileInternalStream_ioctl);
 }
@@ -361,8 +361,11 @@ void* HOOK_HostFs__PlayStation2_FileDeviceRo_IOControlStream(struct FileDeviceRo
 }
 */
 
-int IsStreamedFile(char* fileName)
+bool IsStreamedFile(char* fileName)
 {
+    if (starts_with(fileName, "carsound/"))
+        return true;
+
     char* ext = get_filename_ext(fileName);
     return ext != 0 && (!__strcmp(ext, "ins") || !__strcmp(ext, "ads") || !__strcmp(ext, "sqt") || !__strcmp(ext, "es") || !__strcmp(ext, "pss"));
 }

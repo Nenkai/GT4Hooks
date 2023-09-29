@@ -14,4 +14,4 @@ int HOOK_HostFs__PDISTD_FileDevice_readStream(struct FileDevice* device, struct 
 //void* HOOK_HostFs__PlayStation2_FileDeviceRo_IOControlStream(struct FileDeviceRo* device, struct FileInternalStream* stream, void* command);
 
 int HandleHostFsOpen(struct FileDeviceRo* device, struct FileInternalStream* stream, char* fileName, struct FileObject* fileObj);
-int IsStreamedFile(char* fileName);
+bool IsStreamedFile(char* fileName);

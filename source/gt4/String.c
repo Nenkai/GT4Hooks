@@ -1,3 +1,4 @@
+#include "stdbool.h"
 #include "String.h"
 
 char *strrchr (char *s, int c)
@@ -9,6 +10,17 @@ char *strrchr (char *s, int c)
       rtnval = (char*) s;
   } while (*s++);
   return (rtnval);
+}
+
+bool starts_with(char *restrict string, char* prefix)
+{
+    while(*prefix)
+    {
+        if(*prefix++ != *string++)
+            return false;
+    }
+
+    return true;
 }
 
 char *get_filename_ext(char *filename) {
