@@ -26,6 +26,9 @@ SECTIONS {
 		*(.gnu.linkonce.t*)
 		*(.rodata)  
 		*(.data)
+		*(.rodata)
+		*(.rodata.*)
+		*.o(.text .rodata)
 		KEEP(*(.init))
 		KEEP(*(.fini))
 		QUAD(0)
@@ -42,14 +45,7 @@ SECTIONS {
 		 *(.gnu.attributes)
 	 }
 
-
 	/* Static data.  */
-	.rodata ALIGN(128): {
-		*(.rodata)
-		*(.rodata.*)
-		*(.gnu.linkonce.r*)
-	}
-
 	.data ALIGN(128): {
 		_fdata = . ;
 		*(.data)

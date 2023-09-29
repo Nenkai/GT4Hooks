@@ -48,6 +48,11 @@
         "structs.h": "c",
         "functions.h": "c",
         "hostfs.h": "c",
-        "io.h": "c"
+        "io.h": "c",
+        "span": "c",
+        "string_view": "c",
+        "random": "c",
+        "enums.h": "c",
+        "string.h": "c"
     }
 }
