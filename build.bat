@@ -1,3 +1,5 @@
+@echo off
+
 del /s source\*.o
 powershell external/ps2sdk/ee/bin/vsmake.ps1
 
@@ -13,3 +15,4 @@ if exist ps2plugininjector.exe (
     exit 0
 )
 
+del /s source\*.o

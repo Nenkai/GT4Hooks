@@ -2,7 +2,14 @@ EE_BIN = scripts/GT4Hook.elf
 EE_OBJS = source\main.o \
 source\ps2\Memory.o \
 source\gt4\HostFs.o \
-source\gt4\String.o \
+source\gt4\HOutput.o \
+source\gt4\GameFunctions\IO.o \
+source\gt4\GameFunctions\FileDevice.o \
+source\gt4\GameFunctions\String.o \
+source\gt4\Utils\String.o \
+
+HOSTFS_PRINT = 1
+PRINT_HOSTFS_READS = 0
 
 NEWLIB_NANO = 1
 KERNEL_NOPATCH = 1

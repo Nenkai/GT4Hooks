@@ -53,6 +53,8 @@
         "string_view": "c",
         "random": "c",
         "enums.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "filedevice.h": "c",
+        "houtput.h": "c"
     }
 }

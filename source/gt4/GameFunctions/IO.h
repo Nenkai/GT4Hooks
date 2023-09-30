@@ -1,6 +1,6 @@
+#pragma once
 
-
-#include "..\SceStructs.h"
+#include "..\GameStructs\SceStructs.h"
 
 #define ADDR_sprintf 0x50F1D8
 #define ADDR_print 0x50F120
@@ -15,17 +15,15 @@
 #define ADDR_PlaystationX_LockFileName 0x467060
 #define ADDR_PlayStationX_UnlockFileName 0x467080
 
+extern void (*_sprintf)(char* dest, const char* format, ...);
+extern void (*_print)(const char* format, ...);
 
-void (*_sprintf)(char* dest, const char* format, ...) = (void*)ADDR_sprintf;
-void (*_print)(const char* format, ...) = (void*)ADDR_print;
+extern int (*sceOpen)(const char* name, int flags);
+extern int (*sceClose)(int fd);
+extern int (*sceRead)(int fd, void* buf, int count);
+extern int (*sceLSeek)(int fd, int offset, int whence);
+extern int (*sceGetStat)(const char* name, struct sce_stat *buf);
+extern int (*sceStdioConvertError)(int func, int ioerror);
 
-int (*sceOpen)(const char* name, int flags) = (void*)ADDR_sceOpen;
-int (*sceClose)(int fd) = (void*)ADDR_sceClose;
-int (*sceRead)(int fd, void* buf, int count) = (void*)ADDR_sceRead;
-int (*sceLSeek)(int fd, int offset, int whence) = (void*)ADDR_sceLSeek;
-int (*sceGetStat)(const char* name, struct sce_stat *buf) = (void*)ADDR_sceGetStat;
-int (*sceStdioConvertError)(int func, int ioerror) = (void*)ADDR_sceStdioConvertError;
-
-char* (*PlaystationX_LockFileName)(unsigned int nameHandle) = (void*)ADDR_PlaystationX_LockFileName;
-void (*PlayStationX_UnlockFileName)(unsigned int nameHandle) = (void*)ADDR_PlayStationX_UnlockFileName;
-
+extern char* (*PlaystationX_LockFileName)(unsigned int nameHandle);
+extern void (*PlayStationX_UnlockFileName)(unsigned int nameHandle);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Structs.h"
+#include "GameStructs/FileDevice.h"
 
 void HostFs_InstallHooks();
 

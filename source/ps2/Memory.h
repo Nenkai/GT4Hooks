@@ -51,3 +51,13 @@ void MAKE_JMP(unsigned int addr, void* func);
 	@param addr Address to NOP
 */
 void NOP(unsigned int addr);
+
+/*
+    Hijacks a function address with another one.
+
+	@param func_addr_location Address where the function address is located
+    @param func Hook function
+*/
+void HOOK_FUNC_ADDR(void* func_start_addr, void* func);
+
+void HOOK(unsigned int func_start_addr, void* func);

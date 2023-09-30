@@ -1,36 +1,25 @@
 #include <stdbool.h>
 
-#include "SceStructs.h"
-#include "SceEnums.h"
-#include "HostFs.h"
-#include "String.h"
+#include "..\ps2\Memory.h"
 
 #include "GameFunctions/IO.h"
 #include "GameFunctions/String.h"
 #include "GameFunctions/FileDevice.h"
+#include "GameStructs/SceStructs.h"
+#include "Enums/SceEnums.h"
+#include "Utils/String.h"
 
-#include "..\ps2\Memory.h"
+#include "HostFs.h"
 
 static const char HOST_DIR[] = "VOL_extract";
 
-void HOOK_VTABLE(void* func_start_addr, void* func)
-{
-    *((int*)func_start_addr) = func;
-}
-
-void HOOK(unsigned int func_start_addr, void* func)
-{
-    MAKE_JMP(func_start_addr, func);
-    NOP(func_start_addr + 4); // Avoid cases where branch delay slot screw the stack up
-}
-
 void HostFs_InstallHooks()
 {
-    HOOK_VTABLE((void*)ADDR_PlayStation2_FileDeviceRo2_GetFileEntry, &HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry);
-    HOOK_VTABLE(ADDR_PlayStation2_FileDeviceRo_openStream, &HOOK_HostFs__PlayStation2_FileDeviceRo_openStream);
+    HOOK_FUNC_ADDR((void*)ADDR_PlayStation2_FileDeviceRo2_GetFileEntry, &HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry);
+    HOOK_FUNC_ADDR(ADDR_PlayStation2_FileDeviceRo_openStream, &HOOK_HostFs__PlayStation2_FileDeviceRo_openStream);
     HOOK(ADDR_PlayStation2_FileDeviceRo_rawReadStream, HOOK_HostFs__PlayStation2_FileDeviceRo_rawReadStream);
-    HOOK_VTABLE((void*)ADDR_PlayStation2_FileDeviceRo_closeStream, &HOOK_HostFs__PlayStation2_FileDeviceRo_closeStream);
-    HOOK_VTABLE((void*)ADDR_PDISTD_FileDevice_readStream, &HOOK_HostFs__PDISTD_FileDevice_readStream);
+    HOOK_FUNC_ADDR((void*)ADDR_PlayStation2_FileDeviceRo_closeStream, &HOOK_HostFs__PlayStation2_FileDeviceRo_closeStream);
+    HOOK_FUNC_ADDR((void*)ADDR_PDISTD_FileDevice_readStream, &HOOK_HostFs__PDISTD_FileDevice_readStream);
     //HOOK(ADDR_PlayStation2_FileDeviceRo2_IOControlStream, HOOK_HostFs__PlayStation2_FileDeviceRo_IOControlStream);
     //HOOK(ADDR_PDISTD_FileInternalStream_ioctl, HOOK_HostFs__PDISTD_FileInternalStream_ioctl);
 }
@@ -40,7 +29,9 @@ int HOOK_HostFs__PDISTD_FileDevice_readStream(struct FileDevice* device, struct 
     char* fileName = PlaystationX_LockFileName(stream->FileObject->FileNameHandle);
     bool isStreamedFile = IsStreamedFile(fileName);
 
+#if HOSTFS_PRINT && PRINT_HOSTFS_READS
     _print("FileDeviceRo::readStream: %s\n", fileName);
+#endif
 
     PlayStationX_UnlockFileName(stream->FileObject->FileNameHandle);
 
@@ -71,8 +62,6 @@ int HOOK_HostFs__PDISTD_FileDevice_readStream(struct FileDevice* device, struct 
 // Guessed function name
 bool HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry(struct FileDeviceRo2* device, struct FileStatus* status, char* fileName)
 {
-    _print("FileDeviceRo::GetFileEntry: name=%s\n", fileName);
-
     if (IsStreamedFile(fileName))
     {
         struct VolumeEntryTypeInfo volFile = {0};
@@ -90,8 +79,10 @@ bool HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry(struct FileDeviceRo2* 
                    + *(int*)(pageManager->HeaderBuffer + 0x0C)
                    + volFile.PageOffset;
 
+#if HOSTFS_PRINT
             _print("GetVolumeFileInfo: pageManager compressed=%d, real_size=%x, comp_size=%x, data_offset=%x\n", 
                 status->Compressed, status->RealSize, status->CompressedSize, status->DataOffset);
+#endif
 
             return true;
         }
@@ -107,7 +98,9 @@ bool HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry(struct FileDeviceRo2* 
         int err = 0;
         err = sceStdioConvertError(0, res);
 
+#if HOSTFS_PRINT
         _print("FileDeviceRo::GetFileEntry: sceGetStat name=%s, err=%x, st_size=%x\n", path, err, stat.st_size);
+#endif
 
         if (res >= 0)
         { 
@@ -132,7 +125,9 @@ int HOOK_HostFs__PlayStation2_FileDeviceRo_openStream(struct FileDeviceRo* devic
     // Lock name handle
     char* fileName = PlaystationX_LockFileName(fileObj->FileNameHandle);
 
+#if HOSTFS_PRINT
     _print("FileDeviceRo::openStream: name=%s, mode=%d\n", fileName, fileMode);
+#endif
 
     if (fileMode != 3)
     {
@@ -154,11 +149,9 @@ int HOOK_HostFs__PlayStation2_FileDeviceRo_openStream(struct FileDeviceRo* devic
                     goto err;
 
                 res = device->Pipe.Base.VTable->getCdOffsetFromDataOffset(device, fileName, status.DataOffset, status.CompressedSize);
-                _print("FileDeviceRo::openStream: loading streamed file. getCdOffsetFromDataOffset=%x\n", res);
             }
             else
             {
-                _print("FileDeviceRo::openStream: from hostfs\n");
                 res = HandleHostFsOpen(device, stream, fileName, fileObj);
             }
         }
@@ -210,8 +203,9 @@ int HandleHostFsOpen(struct FileDeviceRo* device, struct FileInternalStream* str
 
         int fd = sceOpen(pathToFile, SCE_RDONLY);
 
+#if HOSTFS_PRINT
         _print("HandleHostFsOpen: name=%s, fd=%d\n", fileName, fd);
-
+#endif
         if (fd >= 0)
         {
             // Reuse data offset field as a file descriptor lol
@@ -221,7 +215,9 @@ int HandleHostFsOpen(struct FileDeviceRo* device, struct FileInternalStream* str
     }
     else
     {
-        _print("Failed, status isn't OK\n");
+#if HOSTFS_PRINT
+        _print("HandleHostFsOpen: Failed, status isn't OK\n");
+#endif
     }
 
     return 0;
@@ -246,7 +242,9 @@ int HOOK_HostFs__PlayStation2_FileDeviceRo_rawReadStream(struct FileDeviceRo* de
 
     int actuallyRead = sceRead(fd, outputPtr, toRead);
 
+#if HOSTFS_PRINT && PRINT_HOSTFS_READS
     _print("FileDeviceRo::rawReadStream: fd=%d, req=%x, read=%x, offset=%x, data=%x\n", fd, toRead, actuallyRead, currentOffset, *(int*)outputPtr);
+#endif
 
     // Update
     stream->State->Offset += actuallyRead;
@@ -268,14 +266,13 @@ int HOOK_HostFs__PlayStation2_FileDeviceRo_closeStream(struct FileDeviceRo* devi
         stream->State = 0;
     }
 
+#if HOSTFS_PRINT
+        _print("FileDeviceRo::closeStream");
+#endif
+
     if (stream->FileObject->Status.DataOffset == 0)
     {
-        _print("FileDeviceRo::closeStream: fd=%d", stream->FileObject->Status.DataOffset);
         int res = sceClose(stream->FileObject->Status.DataOffset);
-    }
-    else
-    {
-        _print("FileDeviceRo::closeStream (vol file)\n");
     }
 
     return 0;
