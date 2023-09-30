@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 
 #include "..\ps2\Memory.h"
 
@@ -263,11 +264,11 @@ int HOOK_HostFs__PlayStation2_FileDeviceRo_closeStream(struct FileDeviceRo* devi
         ((void(*)(int))0x51B4A8)(stream->State->field_0x00);
         UnitArenaBase_free((void*)0x885360, stream->State->field_0x0C);
         UnitArenaBase_free((void*)0x885340, stream->State);
-        stream->State = 0;
+        stream->State = NULL;
     }
 
 #if HOSTFS_PRINT
-        _print("FileDeviceRo::closeStream");
+        _print("FileDeviceRo::closeStream\n");
 #endif
 
     if (stream->FileObject->Status.DataOffset == 0)
@@ -364,5 +365,5 @@ bool IsStreamedFile(char* fileName)
         return true;
 
     char* ext = get_filename_ext(fileName);
-    return ext != 0 && (!__strcmp(ext, "ins") || !__strcmp(ext, "ads") || !__strcmp(ext, "sqt") || !__strcmp(ext, "es") || !__strcmp(ext, "pss"));
+    return ext != NULL && (!__strcmp(ext, "ins") || !__strcmp(ext, "ads") || !__strcmp(ext, "sqt") || !__strcmp(ext, "es") || !__strcmp(ext, "pss"));
 }

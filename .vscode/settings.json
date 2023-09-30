@@ -55,6 +55,9 @@
         "enums.h": "c",
         "string.h": "c",
         "filedevice.h": "c",
-        "houtput.h": "c"
+        "houtput.h": "c",
+        "adhoc.h": "c",
+        "typeindex": "c",
+        "typeinfo": "c"
     }
 }

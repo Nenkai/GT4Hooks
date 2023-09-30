@@ -3,9 +3,12 @@ EE_OBJS = source\main.o \
 source\ps2\Memory.o \
 source\gt4\HostFs.o \
 source\gt4\HOutput.o \
+source\gt4\CameraSys.o \
+source\gt4\Adhoc.o \
 source\gt4\GameFunctions\IO.o \
 source\gt4\GameFunctions\FileDevice.o \
 source\gt4\GameFunctions\String.o \
+source\gt4\GameFunctions\Adhoc.o \
 source\gt4\Utils\String.o \
 
 HOSTFS_PRINT = 1
@@ -17,7 +20,7 @@ KERNEL_NOPATCH = 1
 BASE_ADDRESS = 0x80000
 EE_LINKFILE = linkfile
 
-EE_CFLAGS =  -fno-zero-initialized-in-bss -O0
+EE_CFLAGS =  -fno-zero-initialized-in-bss -O0 -DHOSTFS_PRINT=${HOSTFS_PRINT} 
 EE_LDFLAGS = -Wl,--entry=INVOKER -Wl,-Map,scripts/GT4Hook.map -Wl,'--defsym=BASE_ADDRESS=$(BASE_ADDRESS)' -ffunction-sections -Wl,--gc-sections -fdata-sections
 
 all: $(EE_BIN)
