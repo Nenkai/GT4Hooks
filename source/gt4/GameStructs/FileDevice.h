@@ -2,15 +2,15 @@
 
 #include "../Enums/Enums.h"
 
-struct UnitArena
+typedef struct UnitArena
 {
     int field_0x00;
     int Offset;
     int field_0x08;
     void* field_0x0C;
-};
+} UnitArena;
 
-struct FileStatus
+typedef struct FileStatus
 {
     FileError Status;
     int Compressed;
@@ -18,9 +18,11 @@ struct FileStatus
     int CompressedSize;
     char* Buffer;
     int DataOffset;
-};
+} FileStatus;
 
-struct FileObject
+typedef struct FileDeviceRo FileDeviceRo;
+
+typedef struct FileObject
 {
     int field_0;
     int field_4;
@@ -36,7 +38,7 @@ struct FileObject
     int field_2C;
     int field_30;
     int field_34;
-    struct FileDeviceRo* Device;
+    FileDeviceRo* Device;
     int ListElement;
     int field_40;
     int field_44;
@@ -56,48 +58,48 @@ struct FileObject
     int field_78;
     int field_7C;
     int field_80;
-    struct FileStatus Status;
+    FileStatus Status;
     int field_9C;
     int field_A0;
     int DataOffset;
     int VTable;
-};
+} FileObject;
 
-struct MemorySpace
+typedef struct MemorySpace
 {
     void* BufferPtr;
     int BufferSize;
-};
+} MemorySpace;
 
 ////////////////////////////////////////////////
 // Streams
 ///////////////////////////////////////////////
-struct FileInternalStream
+typedef struct FileInternalStream
 {
     int Status;
-    struct FileObject* FileObject;
+    FileObject* FileObject;
     int unk3;
-    struct UnitArena* State;
+    UnitArena* State;
     int field_0x10;
     int field_0x14;
     int DefaultCallback;
     int field_0x1C;
     int vtable;
-};
+} FileInternalStream;
 
-struct FileInternalStreamDefault
+typedef struct FileInternalStreamDefault
 {
-    struct FileInternalStream Base;
+    FileInternalStream Base;
     int unk;
     unsigned long long CurrentOffset;
-    struct MemorySpace MemSpace;
+    MemorySpace MemSpace;
     int field_0x38;
-};
+} FileInternalStreamDefault;
 
 ////////////////////////////////////////////////
 // FileDeviceRo specifics
 ///////////////////////////////////////////////
-struct VolumeEntryTypeInfo
+typedef struct VolumeEntryTypeInfo
 {
   int Status;
   int NodeID;
@@ -107,105 +109,109 @@ struct VolumeEntryTypeInfo
   int CompressedSize;
   int RealSize;
   char EntryType;
-};
+} VolumeEntryTypeInfo;
 
-struct PageManager
+typedef struct PageManagerUnk
+{
+  int a;
+  int b;
+  int c;
+  int d;
+  int e;
+} PageManagerUnk;
+
+typedef struct PageManager
 {
   void* vtable;
   char *HeaderBuffer;
   int field_8;
   int RoInflator;
-  struct Unk
-  {
-    int a;
-    int b;
-    int c;
-    int d;
-    int e;
-  } field_0x10;
-};
+  PageManagerUnk field_0x10;
+} PageManager;
 
 ////////////////////////////////////////
 // File Devices
 ////////////////////////////////////////
-struct FileDevice;
+typedef struct FileDevice FileDevice;
 
-typedef void* (*IOControlStream_cb)(void *, struct FileInternalStream*, void*);
-typedef void* (*readStat_cb)(struct FileStatus*, struct FileDevice*, struct FileObject*);
-typedef int (*getCdOffsetFromDataOffset_cb)(struct FileDeviceRo*, char*, int, int);
-typedef int (*rawReadStream_cb)(struct FileDevice*, struct FileInternalStream*, struct MemorySpace*);
+typedef void* (*IOControlStream_cb)(void *, FileInternalStream*, void*);
+typedef void* (*readStat_cb)(FileStatus*, FileDevice*, FileObject*);
+typedef int (*getCdOffsetFromDataOffset_cb)(FileDeviceRo*, char*, int, int);
+typedef int (*rawReadStream_cb)(FileDevice*, FileInternalStream*, MemorySpace*);
 
-struct FileDevice
+typedef struct FileDeviceVT
+{
+    char fields[0x9C];
+    rawReadStream_cb rawReadStream;
+    void* field_A0;
+    void* readStream;
+    void* field_A8;
+    void* seekStream;
+    void* field_B0;
+    void* tellStream;
+    void* field_B8;
+    void* writeStream;
+    void* field_C0;
+    IOControlStream_cb IOControlStream;
+    void* field_C8;
+    readStat_cb readStat;
+    void* field_D0;
+    getCdOffsetFromDataOffset_cb getCdOffsetFromDataOffset;
+} FileDeviceVT;
+
+typedef struct FileDevice
 {
     char fields[0xA4];
-    struct FileDeviceVT
-    {
-        char fields[0x9C];
-        rawReadStream_cb rawReadStream;
-        void* field_A0;
-        void* readStream;
-        void* field_A8;
-        void* seekStream;
-        void* field_B0;
-        void* tellStream;
-        void* field_B8;
-        void* writeStream;
-        void* field_C0;
-        IOControlStream_cb IOControlStream;
-        void* field_C8;
-        readStat_cb readStat;
-        void* field_D0;
-        getCdOffsetFromDataOffset_cb getCdOffsetFromDataOffset;
-    } *VTable;
-};
+    FileDeviceVT *VTable;
+} FileDevice;
 
-struct FileDevicePipe
+typedef struct FileDevicePipe
 {
-    struct FileDevice Base;
+    FileDevice Base;
     int field_0xA8;
     int MountPath;
-};
+} FileDevicePipe;
 
-struct FileDeviceRo
+typedef struct FileDeviceRo
 {
-    struct FileDevicePipe Pipe;
+    FileDevicePipe Pipe;
     int UnkBool;
     char* VolPath;
     int TocOffset;
     int TocPageOffset;
-};
+} FileDeviceRo;
 
-struct FileDeviceRo2
+typedef struct FileDeviceRo2
 {
     struct FileDeviceRo Ro;
     int field_0xC0;
-    struct PageManager PageManager;
+    PageManager PageManager;
     int CustomPageOffset;
     int TopFileDevice;
-    struct FileDeviceRo2 *PtrToSelf;
-};
+    void *PtrToSelf;
+} FileDeviceRo2;
 
 /////////////////////////////////
 // IOCTL
 /////////////////////////////////
-struct IOControlStreamCommand0
+typedef struct IOControlStreamCommand0
 {
     int Mode;
     char padding[0x0C];
-};
+} IOControlStreamCommand0;
 
-struct IOControlStreamCommand1
+typedef struct IOControlStreamCommand1
 {
     int Mode;
     void* Buffer;
     int Size;
     int Unused;
-};
+} IOControlStreamCommand1;
 
-struct IOControlStreamCommand2
+typedef struct IOControlStreamCommand2
 {
     int Mode;
     void* UnkPtr;
     int Size;
     int Unused;
-};
+} IOControlStreamCommand2;

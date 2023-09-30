@@ -25,7 +25,7 @@ void HostFs_InstallHooks()
     //HOOK(ADDR_PDISTD_FileInternalStream_ioctl, HOOK_HostFs__PDISTD_FileInternalStream_ioctl);
 }
 
-int HOOK_HostFs__PDISTD_FileDevice_readStream(struct FileDevice* device, struct FileInternalStream* stream, struct MemorySpace* memSpace, int expand)
+int HOOK_HostFs__PDISTD_FileDevice_readStream(FileDevice* device, FileInternalStream* stream, MemorySpace* memSpace, int expand)
 {
     char* fileName = PlaystationX_LockFileName(stream->FileObject->FileNameHandle);
     bool isStreamedFile = IsStreamedFile(fileName);
@@ -61,13 +61,13 @@ int HOOK_HostFs__PDISTD_FileDevice_readStream(struct FileDevice* device, struct 
 }
 
 // Guessed function name
-bool HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry(struct FileDeviceRo2* device, struct FileStatus* status, char* fileName)
+bool HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry(FileDeviceRo2* device, FileStatus* status, char* fileName)
 {
     if (IsStreamedFile(fileName))
     {
-        struct VolumeEntryTypeInfo volFile = {0};
+        VolumeEntryTypeInfo volFile = {0};
 
-        struct PageManager* pageManager = &device->PageManager;
+        PageManager* pageManager = &device->PageManager;
         PageManager_GetEntryForFile(&volFile, pageManager, fileName);
 
         if (volFile.Status >= 0)
@@ -116,11 +116,11 @@ bool HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry(struct FileDeviceRo2* 
     return false;
 }
 
-int HOOK_HostFs__PlayStation2_FileDeviceRo_openStream(struct FileDeviceRo* device, struct FileInternalStream *stream)
+int HOOK_HostFs__PlayStation2_FileDeviceRo_openStream(FileDeviceRo* device, FileInternalStream *stream)
 {
     int res = -1;
 
-    struct FileObject* fileObj = stream->FileObject;
+    FileObject* fileObj = stream->FileObject;
     int fileMode = fileObj->FileMode;
 
     // Lock name handle
@@ -138,7 +138,7 @@ int HOOK_HostFs__PlayStation2_FileDeviceRo_openStream(struct FileDeviceRo* devic
         }
         else
         {
-            struct FileStatus status = {0};
+            FileStatus status = {0};
 
             // Do NOT load these files from host, they need to be put into IOP memory using IRX RPC, pain to deal with
             if (IsStreamedFile(fileName))
@@ -165,12 +165,12 @@ int HOOK_HostFs__PlayStation2_FileDeviceRo_openStream(struct FileDeviceRo* devic
             PDISTD_FileDevice_setExpander(device, stream);
 
             // This is required for files that we force read from CDVD
-            struct UnitArena* unit = UnitArenaBase_allocate((struct UnitArena*)(0x885340));
+            UnitArena* unit = UnitArenaBase_allocate((UnitArena*)(0x885340));
             // Actual disc sector offset likely goes here - calculated from 0x466C00 (FileDeviceRo2::GetSectorOffsetOfFileName?)
             unit->field_0x00 = res; 
             unit->Offset = 0;
             unit->field_0x08 = 0;
-            unit->field_0x0C = UnitArenaBase_allocate((struct UnitArena*)(0x885360));
+            unit->field_0x0C = UnitArenaBase_allocate((UnitArena*)(0x885360));
             stream->State = unit;
         }
         else
@@ -189,10 +189,10 @@ err:
     return res;
 }
 
-int HandleHostFsOpen(struct FileDeviceRo* device, struct FileInternalStream* stream, char* fileName, struct FileObject* fileObj)
+int HandleHostFsOpen(FileDeviceRo* device, FileInternalStream* stream, char* fileName, FileObject* fileObj)
 {
     // Start opening
-    struct FileStatus status = {0};
+    FileStatus status = {0};
 
     device->Pipe.Base.VTable->readStat(&status, device, fileObj);
     fileObj->Status = status;
@@ -224,7 +224,7 @@ int HandleHostFsOpen(struct FileDeviceRo* device, struct FileInternalStream* str
     return 0;
 }
 
-int HOOK_HostFs__PlayStation2_FileDeviceRo_rawReadStream(struct FileDeviceRo* device, struct FileInternalStream *stream, struct MemorySpace* memSpace)
+int HOOK_HostFs__PlayStation2_FileDeviceRo_rawReadStream(FileDeviceRo* device, FileInternalStream *stream, MemorySpace* memSpace)
 {
     // Some notes: files read through hFileIO::read will read buffered 0x800 chunks.
     // This is the case for i.e projects/GT4Application.adc
@@ -254,7 +254,7 @@ int HOOK_HostFs__PlayStation2_FileDeviceRo_rawReadStream(struct FileDeviceRo* de
     return actuallyRead;
 }
 
-int HOOK_HostFs__PlayStation2_FileDeviceRo_closeStream(struct FileDeviceRo* device, struct FileInternalStream *stream)
+int HOOK_HostFs__PlayStation2_FileDeviceRo_closeStream(FileDeviceRo* device, FileInternalStream *stream)
 {
     PDISTD_FileDevice_removeExpander(device, stream);
     if (stream->State)

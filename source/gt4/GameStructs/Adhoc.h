@@ -1,40 +1,53 @@
 #pragma once
 
-struct HClassInit
+typedef struct HClassInit HClassInit;
+typedef struct HClassInit
 {
     char* ModuleName;
     void* Create_cb;
     void* Init_cb;
     void* Cleanup_cb;
-    struct HClassInit* Previous;
-};
+    HClassInit* Previous;
+} HClassInit;
 
-struct RefCounter
+typedef struct RefCounter
 {
   int dword0;
   void* vtable;
-};
+} RefCounter;
 
-struct hObject
+typedef struct hObject
 {
-  struct RefCounter RefCounter;
+  RefCounter RefCounter;
   int dword8;
   int dwordC;
-};
+} hObject;
 
-struct hModule
+typedef struct hModule
 {
-  struct hObject Object;
+  hObject Object;
   long long qword10;
   char gap18[4];
   int int1C;
   int dword20;
   char byte24;
   int dword28;
-};
+} hModule;
 
-struct hClass
+typedef struct hClass
 {
-  struct hModule Module;
+  hModule Module;
   int dword2C;
-};
+} hClass;
+
+// Numeric
+typedef struct hInt
+{
+  hObject Object;
+  int Value;
+} hInt;
+
+typedef struct HInt
+{
+  void* aa;
+} HInt;

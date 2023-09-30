@@ -25,11 +25,11 @@
 //int (*PlayStation2_FileDeviceRo_pipe)(struct FileDeviceRo* device, void* command) = (void*)ADDR_PlayStation2_FileDeviceRo_pipe;
 //void* (*PDISTD_FileInternalStream_ioctl)(void* stream, void* command) = (void*)ADDR_PDISTD_FileInternalStream_ioctl;
 
-extern void (*PageManager_GetEntryForFile)(struct VolumeEntryTypeInfo* retEntry, struct PageManager* manager, char* fileName);
-extern void* (*UnitArenaBase_allocate)(struct UnitArena* ptr);
-extern void* (*UnitArenaBase_free)(void*, struct UnitArena* ptr);
+extern void (*PageManager_GetEntryForFile)(VolumeEntryTypeInfo* retEntry, PageManager* manager, char* fileName);
+extern void* (*UnitArenaBase_allocate)(UnitArena* ptr);
+extern void* (*UnitArenaBase_free)(void*, UnitArena* ptr);
 
 extern struct FileDevice* (*PDISTD_FileInternalStream_getDevice)(void* stream);
-extern void (*PDISTD_FileStatus_FileStatus)(struct FileStatus* status);
-extern void (*PDISTD_FileDevice_setExpander)(void* device, struct FileInternalStream *stream);
-extern void (*PDISTD_FileDevice_removeExpander)(void* device, struct FileInternalStream *stream);
+extern void (*PDISTD_FileStatus_FileStatus)(FileStatus* status);
+extern void (*PDISTD_FileDevice_setExpander)(void* device, FileInternalStream *stream);
+extern void (*PDISTD_FileDevice_removeExpander)(void* device, FileInternalStream *stream);
