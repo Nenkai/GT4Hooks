@@ -58,6 +58,7 @@
         "houtput.h": "c",
         "adhoc.h": "c",
         "typeindex": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "mmymodule.h": "c"
     }
 }

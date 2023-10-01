@@ -13,7 +13,7 @@ void init()
     HostFs_InstallHooks();
     HOutput_InstallHooks();
     //CameraSys_InstallHooks();
-    //ADHOC_RegisterModules();
+    //ADHOC_InjectNewModules();
 }
 
 void __attribute__((optimize("O3"))) INVOKER()
