@@ -10,6 +10,7 @@ source\gt4\GameFunctions\FileDevice.o \
 source\gt4\GameFunctions\String.o \
 source\gt4\GameFunctions\Adhoc.o \
 source\gt4\Utils\String.o \
+source\gt4\Adhoc\Decl.o \
 source\gt4\Adhoc\MMyModule.o \
 
 HOSTFS_PRINT = 1

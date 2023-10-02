@@ -1,6 +1,8 @@
 #include "IO.h"
 
 void (*_sprintf)(char* dest, const char* format, ...) = (void*)ADDR_sprintf;
+
+/* TTY Print. */
 void (*_print)(const char* format, ...) = (void*)ADDR_print;
 
 int (*sceOpen)(const char* name, int flags) = (void*)ADDR_sceOpen;

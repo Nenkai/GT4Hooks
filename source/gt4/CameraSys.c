@@ -3,7 +3,9 @@
 #include "..\ps2\Memory.h"
 
 #include "CameraSys.h"
+#include "Enums\Enums.h"
 #include "GameFunctions\CameraSys.h"
+#include "GameFunctions\IO.h"
 
 void CameraSys_InstallHooks()
 {
@@ -11,12 +13,21 @@ void CameraSys_InstallHooks()
     MAKE_JAL(0x23F444, &HOOK__CameraSys_CameraOnBoard_GetCamOffset);
 }
 
-#define NUM_CAMS 25
-static int CameraSys__mtTable[NUM_CAMS] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24};
+static CameraOnboardMount CameraSys__mtTable[] = {
+    CameraOnboardMount_DRIVER,   // 0
+    CameraOnboardMount_CHASE,    // 1
+    CameraOnboardMount_BONNET,   // 6
+    CameraOnboardMount_ROOF,     // 7
+    CameraOnboardMount_OPTION_1, // 18
+    CameraOnboardMount_METER,    // 20
+};
 
-int HOOK__CameraSys_CameraOnBoard_GetCameraMountIndex(int nextCamera)
+int HOOK__CameraSys_CameraOnBoard_GetCameraMountIndex(CameraOnboardMount nextCamera)
 {
-    for (int i = 0; i < NUM_CAMS; i++)
+    _print("HOOK__CameraSys_CameraOnBoard_GetCameraMountIndex: %d\n", nextCamera);
+    const int numCams = sizeof(CameraSys__mtTable) / sizeof(CameraSys__mtTable[0]);
+
+    for (int i = 0; i < numCams; i++)
     {
         if (CameraSys__mtTable[i] == nextCamera)
             return i;
@@ -25,7 +36,8 @@ int HOOK__CameraSys_CameraOnBoard_GetCameraMountIndex(int nextCamera)
     return -1;
 }
 
-int HOOK__CameraSys_CameraOnBoard_GetCamOffset(int currentCamMountIndex, int currentCamMount)
+int HOOK__CameraSys_CameraOnBoard_GetCamOffset(int currentCamMountIndex, CameraOnboardMount currentCamMount)
 {
-    return CameraSys__mtTable[(currentCamMountIndex + currentCamMount) % NUM_CAMS];
+    const int numCams = sizeof(CameraSys__mtTable) / sizeof(CameraSys__mtTable[0]);
+    return CameraSys__mtTable[(currentCamMountIndex + currentCamMount) % numCams];
 }

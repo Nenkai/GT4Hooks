@@ -12,7 +12,7 @@ void init()
 {
     HostFs_InstallHooks();
     HOutput_InstallHooks();
-    //CameraSys_InstallHooks();
+    CameraSys_InstallHooks();
     //ADHOC_InjectNewModules();
 }
 

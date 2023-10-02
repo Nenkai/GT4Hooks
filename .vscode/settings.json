@@ -59,6 +59,13 @@
         "adhoc.h": "c",
         "typeindex": "c",
         "typeinfo": "c",
-        "mmymodule.h": "c"
+        "mmymodule.h": "c",
+        "algorithm": "cpp",
+        "xtr1common": "cpp",
+        "*.tcc": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp",
+        "variant": "cpp"
     }
 }

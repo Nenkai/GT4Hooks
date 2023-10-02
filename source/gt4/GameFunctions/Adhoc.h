@@ -18,6 +18,9 @@
 #define ADDR_RefCounter_unref 0x50C138
 
 #define ADDR_hModule_defineFunction 0x4F0650
+#define ADDR_hModule_defineMethod 0x4F0B10
+#define ADDR_hModule_defineStatic 0x4F0830
+#define ADDR_hModule_defineAttribute 0x4F0C00
 
 // Ref counter
 extern void (*RefCounter_ref)(RefCounter* this);
@@ -40,5 +43,21 @@ extern struct hClass* (*hObject_GetClassID)();
 
 extern void (*hClass_setSuperClassID)(hClass* this, hClass* super); 
 
-typedef void (*Adhoc_function_cb)(void*, int argc, hObject** argv);
+/* Adhoc function callback handler */
+typedef void (*Adhoc_function_cb)(HObject* return_value, int argc, hObject** argv);
+
+/* Defines a new adhoc function in this module. */
 extern void (*hModule_defineFunction)(void*, hModule* thisModule, char* functionName, Adhoc_function_cb function);
+
+/* Adhoc method callback handler */
+typedef void (*Adhoc_method_cb)(HObject* return_value, HObject* this, int argc, hObject** argv);
+
+/* Defines a new adhoc method in this module. */
+extern void (*hModule_defineMethod)(void*, hModule* thisModule, char* methodName, Adhoc_method_cb method);
+
+/* Defines a new adhoc static member (i.e constants). */
+extern void (*hModule_defineStatic)(void*, hModule* thisModule, char* staticName, HObject* value);
+
+/* Adhoc attrubute callback handler */
+typedef void (*Adhoc_attribute_cb)(HObject* return_value, HObject* this, HObject* unk, int argc, hObject** argv);
+extern void (*hModule_defineAttibute)(void*, hModule* thisModule, char* attributeName, Adhoc_attribute_cb getter, Adhoc_attribute_cb setter);

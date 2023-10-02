@@ -15,3 +15,6 @@ void (*HInt_HInt)(HInt* this, int value) = (void*)ADDR_HInt_HInt;
 void (*HInt_dtor)(HInt* this, int flag) = (void*)ADDR_HInt_dtor;
 
 void (*hModule_defineFunction)(void*, hModule* thisModule, char* functionName, Adhoc_function_cb function) = (void*)ADDR_hModule_defineFunction;
+void (*hModule_defineMethod)(void*, hModule* thisModule, char* methodName, Adhoc_method_cb method) = (void*)ADDR_hModule_defineMethod;
+void (*hModule_defineStatic)(void*, hModule* thisModule, char* staticName, HObject* value) = (void*)ADDR_hModule_defineStatic;
+void (*hModule_defineAttribute)(void*, hModule* thisModule, char* attributeName, Adhoc_attribute_cb getter, Adhoc_attribute_cb setter) = (void*)ADDR_hModule_defineAttribute;

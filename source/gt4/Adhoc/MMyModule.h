@@ -5,4 +5,6 @@
 #include "..\Adhoc.h"
 #include "Decl.h"
 
-ADHOC_MODULE_HEADER(mMyModule);
+ADHOC_HEADER_MODULE(mMyModule);
+
+void f_GetHookSTDCVersion(HObject* return_value, int argc, hObject** argv);
