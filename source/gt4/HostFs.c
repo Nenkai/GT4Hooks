@@ -14,6 +14,15 @@
 
 static const char HOST_DIR[] = "VOL_extract";
 
+/* Hook: HostFS
+   Purpose: Hijack FileDeviceRo (read only volume reader)'s functions to read loose files.
+   How: Overrides relevant file device functions. Files that must be streamed from IOP (i.e sound/movies) was considered, but too hard.
+        These files MUST be streamed from IOP.
+        Which is why there's some remaining code for ioctl/IOControlStream, which are the ones that are used for streaming.
+        The overriden functions are almost identical to original code, but adds HostFS handling aswell.
+   Note: Modify "HOST_DIR" above.
+*/
+
 void HostFs_InstallHooks()
 {
     HOOK_FUNC_ADDR((void*)ADDR_PlayStation2_FileDeviceRo2_GetFileEntry, &HOOK_HostFs__PlayStation2_FileDeviceRo2_GetFileEntry);

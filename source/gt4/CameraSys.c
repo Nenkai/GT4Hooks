@@ -7,6 +7,12 @@
 #include "GameFunctions\CameraSys.h"
 #include "GameFunctions\IO.h"
 
+/* Hook: CameraSys
+   Purpose: Adds more switchable gameplay cameras (CameraOnboard).
+   How: Adds more cameras to CameraSys::_mtTable, which defines the available cams to switch through.
+        The extra functions overriden simply readjust the table size.
+*/
+
 void CameraSys_InstallHooks()
 {
     MAKE_JAL(0x23F438, &HOOK__CameraSys_CameraOnBoard_GetCameraMountIndex);

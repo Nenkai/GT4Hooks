@@ -12,3 +12,22 @@ struct sce_stat
     unsigned int    st_hisize;    
     unsigned int    st_private[6];
 };
+
+typedef struct
+{
+	unsigned char Resv2,Sec,Min,Hour;
+	unsigned char Day,Month;
+	unsigned short Year;
+} sceMcStDateTime;
+
+typedef struct
+{
+	sceMcStDateTime _Create;
+	sceMcStDateTime _Modify;
+	unsigned int FileSizeByte;
+	unsigned short AttrFile;
+	unsigned short Reserve1;
+	unsigned int Reserve2;
+	unsigned int PdaAplNo;
+	unsigned char EntryName[32];
+} sceMcTblGetDir __attribute__((aligned (64)));

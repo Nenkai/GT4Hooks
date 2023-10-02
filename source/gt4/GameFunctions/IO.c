@@ -12,5 +12,8 @@ int (*sceLSeek)(int fd, int offset, int whence) = (void*)ADDR_sceLSeek;
 int (*sceGetStat)(const char* name, struct sce_stat *buf) = (void*)ADDR_sceGetStat;
 int (*sceStdioConvertError)(int func, int ioerror) = (void*)ADDR_sceStdioConvertError;
 
+int (*sceMcGetDir)(int port, int slot, const char* name, unsigned int mode, int maxent, sceMcTblGetDir* table) = (void*)ADDR_sceMcGetDir;
+int (*sceMcSync)(int mode, int* cmd, int* result) = (void*)ADDR_sceMcSync;
+
 char* (*PlaystationX_LockFileName)(unsigned int nameHandle) = (void*)ADDR_PlaystationX_LockFileName;
 void (*PlayStationX_UnlockFileName)(unsigned int nameHandle) = (void*)ADDR_PlayStationX_UnlockFileName;

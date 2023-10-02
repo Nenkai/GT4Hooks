@@ -5,6 +5,7 @@
 #include "gt4\HOutput.h"
 #include "gt4\CameraSys.h"
 #include "gt4\Adhoc.h"
+#include "gt4\MStorage.h"
 
 #include "gt4\GameFunctions\IO.h"
 
@@ -14,6 +15,7 @@ void init()
     HOutput_InstallHooks();
     CameraSys_InstallHooks();
     //ADHOC_InjectNewModules();
+    MStorage_InstallHooks();
 }
 
 void __attribute__((optimize("O3"))) INVOKER()

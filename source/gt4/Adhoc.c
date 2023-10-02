@@ -8,6 +8,12 @@ void (*funcs[])() = {
     mMyModule_CreateInit_,
 };
 
+/* Hook: Adhoc
+   Purpose: Adds new adhoc modules.
+   How: Creates brand new class inits, class definitions.
+   Note: Not done yet, see TODO below.
+*/
+
 void ADHOC_InjectNewModules()
 {
     // Base modules are always added in engine, new modules needs to be added

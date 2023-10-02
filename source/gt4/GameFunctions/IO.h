@@ -12,6 +12,9 @@
 #define ADDR_sceStdioConvertError 0x5E5AF0
 #define ADDR_sceLSeek 0x5DF740
 
+#define ADDR_sceMcGetDir 0x5B9620
+#define ADDR_sceMcSync 0x5B9310
+
 #define ADDR_PlaystationX_LockFileName 0x467060
 #define ADDR_PlayStationX_UnlockFileName 0x467080
 
@@ -24,6 +27,9 @@ extern int (*sceRead)(int fd, void* buf, int count);
 extern int (*sceLSeek)(int fd, int offset, int whence);
 extern int (*sceGetStat)(const char* name, struct sce_stat *buf);
 extern int (*sceStdioConvertError)(int func, int ioerror);
+
+extern int (*sceMcGetDir)(int port, int slot, const char* name, unsigned int mode, int maxent, sceMcTblGetDir* table);
+extern int (*sceMcSync)(int mode, int* cmd, int* result);
 
 extern char* (*PlaystationX_LockFileName)(unsigned int nameHandle);
 extern void (*PlayStationX_UnlockFileName)(unsigned int nameHandle);
