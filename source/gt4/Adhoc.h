@@ -4,6 +4,7 @@
 #include "GameFunctions\String.h"
 
 void ADHOC_InjectNewModules();
+void  HOOK_defineMoreClasses(void* value, hClass* previous, hClass* classId);
 
 // std::basic_string shit
 #define STD_STRING_BOILERPLATE(name) \

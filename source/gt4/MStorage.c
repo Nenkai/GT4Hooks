@@ -7,6 +7,7 @@
 #include "GameFunctions\String.h"
 #include "GameFunctions\MStorage.h"
 #include "GameFunctions\IO.h"
+#include "GameFunctions\Monitor.h"
 
 /* Hook: MStorage
    Purpose: Allows reading files from memory card from adhoc.
@@ -28,6 +29,7 @@ void MStorage_InstallHooks()
 unsigned int HOOK__mStorageMC_getFileSize(void* this, char* name)
 {
     // Note: game immediately reuses return value into a malloc, so do not return something like -1
+    PDISTD_Monitor_lock((void*)(0x680F6C + 52)); // thread lock
 
     int cmd, result;
 
@@ -54,6 +56,8 @@ unsigned int HOOK__mStorageMC_getFileSize(void* this, char* name)
         if (!__strcmp(entry->EntryName, fileName))
             return entry->FileSizeByte;
     }
+
+    PDISTD_Monitor_unlock((void*)(0x680F6C + 52)); // thread unlock
 
     // Not found
     _print("mStorageMC::getFileSize: err not found name=%s, res=%d\n", name, result);

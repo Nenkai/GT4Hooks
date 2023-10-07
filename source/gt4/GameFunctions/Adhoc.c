@@ -26,3 +26,4 @@ void (*hModule_defineFunction)(void*, hModule* thisModule, char* functionName, A
 void (*hModule_defineMethod)(void*, hModule* thisModule, char* methodName, Adhoc_method_cb method) = (void*)ADDR_hModule_defineMethod;
 void (*hModule_defineStatic)(void*, hModule* thisModule, char* staticName, HObject* value) = (void*)ADDR_hModule_defineStatic;
 void (*hModule_defineAttribute)(void*, hModule* thisModule, char* attributeName, Adhoc_attribute_cb getter, Adhoc_attribute_cb setter) = (void*)ADDR_hModule_defineAttribute;
+void (*hModule_defineClass)(void*, hModule* previous, hModule* classId) = (void*)ADDR_hModule_defineClass;

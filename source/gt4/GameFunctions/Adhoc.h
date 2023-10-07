@@ -26,6 +26,7 @@
 #define ADDR_hModule_defineMethod 0x4F0B10
 #define ADDR_hModule_defineStatic 0x4F0830
 #define ADDR_hModule_defineAttribute 0x4F0C00
+#define ADDR_hModule_defineClass 0x4EFC00
 
 // Ref counter
 extern void (*RefCounter_ref)(RefCounter* this);
@@ -77,3 +78,5 @@ extern void (*hModule_defineStatic)(void*, hModule* thisModule, char* staticName
 /* Adhoc attrubute callback handler */
 typedef void (*Adhoc_attribute_cb)(HObject* return_value, HObject* this, HObject* unk, int argc, hObject** argv);
 extern void (*hModule_defineAttibute)(void*, hModule* thisModule, char* attributeName, Adhoc_attribute_cb getter, Adhoc_attribute_cb setter);
+
+extern void (*hModule_defineClass)(void*, hModule* previous, hModule* classId);
