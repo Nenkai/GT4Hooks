@@ -8,6 +8,11 @@
 #define ADDR_HInt_HInt 0x4E9B00
 #define ADDR_HInt_dtor 0x4E7FD8
 
+#define ADDR_HFloat_HFloat 0x4E6468
+#define ADDR_HFloat_dtor 0x4E4B98
+
+#define ADDR_HValue_dtor 0x5071C8
+
 #define ADDR_ADHOC_Deallocate 0x508B58
 
 #define ADDR_hObject_GetClassID 0x4F33E8
@@ -26,23 +31,34 @@
 extern void (*RefCounter_ref)(RefCounter* this);
 extern void (*RefCounter_unref)(RefCounter* this);
 
+// HValue
+extern void (*HValue_dtor)(void* this, int flag);;
+
 // HInt
 extern void (*HInt_HInt)(HInt* this, int value);
 extern void (*HInt_dtor)(HInt* this, int flag);
 
+// HFloat
+extern void (*HFloat_HFloat)(HFloat* this, float value);
+extern void (*HFloat_dtor)(HFloat* this, int flag);
+
+// ADHOC
 extern void (*ADHOC_Deallocate)(void* pool, void *buffer, int size);
 
+// HClassInit
 typedef void (*HClassInit_Create_cb)();
 typedef void (*HClassInit_Init_cb)();
 typedef void (*HClassInit_Cleanup_cb)();
-
 extern void (*HClassInit_HClassInit)(const HClassInit* this, const char* name, int size, HClassInit_Create_cb create, HClassInit_Init_cb init, HClassInit_Cleanup_cb cleanup);
 extern struct hClass* (*HClassInit_CreateClass)();
 
-extern struct hClass* (*hObject_GetClassID)();
-
+// hClass
 extern void (*hClass_setSuperClassID)(hClass* this, hClass* super); 
 
+// hObject
+extern struct hClass* (*hObject_GetClassID)();
+
+// hModule
 /* Adhoc function callback handler */
 typedef void (*Adhoc_function_cb)(HObject* return_value, int argc, hObject** argv);
 

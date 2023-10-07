@@ -66,6 +66,8 @@
         "ratio": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "mcargarage.h": "c",
+        "mstorage.h": "c"
     }
 }

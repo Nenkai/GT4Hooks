@@ -25,25 +25,25 @@ void MStorage_InstallHooks()
     HOOK(ADDR_mStorageMC_getFileSize, &HOOK__mStorageMC_getFileSize);
 }
 
-int HOOK__mStorageMC_getFileSize(void* this, char* name)
+unsigned int HOOK__mStorageMC_getFileSize(void* this, char* name)
 {
+    // Note: game immediately reuses return value into a malloc, so do not return something like -1
+
     int cmd, result;
 
-    char copy[128];
+    char copy[128] = {0};
     __strcpy(copy, name);
     char* dir = _dirname(copy);
 
-    char mcDir[128];
+    char mcDir[128] = {0};
     _sprintf(mcDir, "%s/*", dir);
 
-    sceMcTblGetDir table[10];
-    sceMcGetDir(0, 0, mcDir, 0, 10, table);
+    sceMcTblGetDir table[25];
+    sceMcGetDir(0, 0, mcDir, 0, 25, table);
     int res = sceMcSync(0, &cmd, &result);
 
-    //_print("mStorageMC::getFileSize: sceMcSync name=%s, res=%d\n", name, result);
-
     if (res < 0)
-        return -1;
+        return 0;
 
     char* fileName = get_file_name(name);
     for (int i = 0; i < result; i++)
@@ -56,5 +56,6 @@ int HOOK__mStorageMC_getFileSize(void* this, char* name)
     }
 
     // Not found
-    return -1;
+    _print("mStorageMC::getFileSize: err not found name=%s, res=%d\n", name, result);
+    return 0;
 }

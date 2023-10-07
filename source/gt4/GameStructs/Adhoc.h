@@ -188,3 +188,18 @@ typedef struct HInt
 {
   HObject Object;
 } HInt;
+
+typedef struct HFloat
+{
+  HObject Object;
+} HFloat;
+
+typedef struct MCarGarage
+{
+  HObject Object;
+} MCarGarage;
+
+typedef struct CarGarage
+{
+
+} CarGarage;

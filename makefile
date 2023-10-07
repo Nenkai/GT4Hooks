@@ -6,11 +6,13 @@ source\gt4\HOutput.o \
 source\gt4\CameraSys.o \
 source\gt4\Adhoc.o \
 source\gt4\MStorage.o \
+source\gt4\MCarGarage.o \
 source\gt4\GameFunctions\IO.o \
 source\gt4\GameFunctions\FileDevice.o \
 source\gt4\GameFunctions\String.o \
 source\gt4\GameFunctions\Adhoc.o \
 source\gt4\GameFunctions\MStorage.o \
+source\gt4\GameFunctions\MCarGarage.o \
 source\gt4\Utils\String.o \
 source\gt4\Adhoc\Decl.o \
 source\gt4\Adhoc\MMyModule.o \
