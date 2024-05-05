@@ -19,18 +19,37 @@ source\gt4\Adhoc\Decl.o \
 source\gt4\Adhoc\MMyModule.o \
 
 HOSTFS_PRINT = 1
+
+# Whether to print actual file reads. Otherwise just accesses.
 PRINT_HOSTFS_READS = 0
 
 NEWLIB_NANO = 1
 KERNEL_NOPATCH = 1
 
-# Setting it to 0x80000 crashes when the hook gets past 0x82000...
-# Game declares a generic pool/generic allocator before starting from 0x8D0FB0, size 0x1FF8000 (32mb?), 
-# before main is called. It'll be memset'd entirely
+# So, where do we put the new code?
 
-# Current strategy is to wipe the memset call, and put it far ahead
-# This address seems safe-ish for GT4O US, huge data cave
-BASE_ADDRESS = 0x1814000
+# Initially I wanted to put my code before 0x100000, which is the image base for GT4O.
+# Setting it to 0x80000 crashes when the hook gets past 0x82000... 
+
+# The game creates pool/generic allocator (func 0x5225B0) before starting from 0x8D0FB0, size 0x1FF8000 (32mb?) before 
+# main is called. It'll be memset'd to 0 entirely
+
+# We wipe the memset call. main.c should be doing this.
+# They probably did this for hot-reloading, which is not supported here.
+# Then, put our code in an area of memory that seems safe enough.
+
+BASE_ADDRESS = 0x68A480
+# ^^^^^^^^^^^^^^^^^^^^^^
+# This is the static global for wnn_globals_init aka the fep/wnn system ('fep' game folder)
+# (https://socialsolution.omron.com/software/en/products/product_text/iwnn/)
+# Aka japanese wnn keyboard layout handling by omron? Appears completely unused. Proof:
+# -> LoadFep @ 0x1058D0 <<<< No xrefs!
+#   -> PDISTD::InitFep @ 0x45A0F8
+#     -> InitWnn @ 0x56FBF0
+#
+# This is ok to override, this is not used in GT4O.
+# Goes from 0x68A480 to 0x69A790. Plenty of space. (0x10310)
+
 
 EE_LINKFILE = linkfile
 
