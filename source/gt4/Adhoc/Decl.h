@@ -45,7 +45,7 @@ void type_name##_InitClass(hClass* class) \
     STD_STRING(#access_name); \
     ((hModule_VT*)class->Module.Object.RefCounter.vtable)->setName(class, &unk); \
 \
-    char* v4 = (char*)unk - 16; \
+    void* v4 = (char*)unk - 16; \
     long long v5 = (long long)unk - 16; \
     long long v6 = *((int *)unk - 2) - 1; \
     *((int *)unk - 2) = v6; \

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\gt4\Adhoc.c" />
+    <ClCompile Include="source\gt4\Adhoc\Decl.c" />
+    <ClCompile Include="source\gt4\Adhoc\MMyModule.c" />
+    <ClCompile Include="source\gt4\CameraSys.c" />
+    <ClCompile Include="source\gt4\GameFunctions\Adhoc.c" />
+    <ClCompile Include="source\gt4\GameFunctions\FileDevice.c" />
+    <ClCompile Include="source\gt4\GameFunctions\FontManagerClass.c" />
+    <ClCompile Include="source\gt4\GameFunctions\IO.c" />
+    <ClCompile Include="source\gt4\GameFunctions\MCarGarage.c" />
+    <ClCompile Include="source\gt4\GameFunctions\Misc.c" />
+    <ClCompile Include="source\gt4\GameFunctions\Monitor.c" />
+    <ClCompile Include="source\gt4\GameFunctions\MStorage.c" />
+    <ClCompile Include="source\gt4\GameFunctions\PolyphonyGL.c" />
+    <ClCompile Include="source\gt4\GameFunctions\String.c" />
+    <ClCompile Include="source\gt4\HostFs.c" />
+    <ClCompile Include="source\gt4\HOutput.c" />
+    <ClCompile Include="source\gt4\MCarGarage.c" />
+    <ClCompile Include="source\gt4\MStorage.c" />
+    <ClCompile Include="source\gt4\Utils\String.c" />
+    <ClCompile Include="source\main.c" />
+    <ClCompile Include="source\ps2\Memory.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\gt4\Adhoc.h" />
+    <ClInclude Include="source\gt4\Adhoc\Decl.h" />
+    <ClInclude Include="source\gt4\Adhoc\MMyModule.h" />
+    <ClInclude Include="source\gt4\CameraSys.h" />
+    <ClInclude Include="source\gt4\Enums\Enums.h" />
+    <ClInclude Include="source\gt4\Enums\SceEnums.h" />
+    <ClInclude Include="source\gt4\GameFunctions\Adhoc.h" />
+    <ClInclude Include="source\gt4\GameFunctions\CameraSys.h" />
+    <ClInclude Include="source\gt4\GameFunctions\FileDevice.h" />
+    <ClInclude Include="source\gt4\GameFunctions\FontManagerClass.h" />
+    <ClInclude Include="source\gt4\GameFunctions\HOutput.h" />
+    <ClInclude Include="source\gt4\GameFunctions\IO.h" />
+    <ClInclude Include="source\gt4\GameFunctions\MCarGarage.h" />
+    <ClInclude Include="source\gt4\GameFunctions\Misc.h" />
+    <ClInclude Include="source\gt4\GameFunctions\Monitor.h" />
+    <ClInclude Include="source\gt4\GameFunctions\MStorage.h" />
+    <ClInclude Include="source\gt4\GameFunctions\PolyphonyGL.h" />
+    <ClInclude Include="source\gt4\GameFunctions\String.h" />
+    <ClInclude Include="source\gt4\GameStructs\Adhoc.h" />
+    <ClInclude Include="source\gt4\GameStructs\FileDevice.h" />
+    <ClInclude Include="source\gt4\GameStructs\FontManagerClass.h" />
+    <ClInclude Include="source\gt4\GameStructs\PolyphonyGL.h" />
+    <ClInclude Include="source\gt4\GameStructs\SceStructs.h" />
+    <ClInclude Include="source\gt4\HostFs.h" />
+    <ClInclude Include="source\gt4\HOutput.h" />
+    <ClInclude Include="source\gt4\MCarGarage.h" />
+    <ClInclude Include="source\gt4\MStorage.h" />
+    <ClInclude Include="source\gt4\Utils\String.h" />
+    <ClInclude Include="source\ps2\Memory.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{2C95429D-8256-4051-B257-4025D63BC70F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeBuildCommandLine>build.bat</NMakeBuildCommandLine>
+    <NMakeOutput>$(OutDir)GT4Hooks.elf</NMakeOutput>
+    <NMakeCleanCommandLine>build.bat</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>del /s *.o</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeBuildCommandLine>build.bat</NMakeBuildCommandLine>
+    <NMakeOutput>$(OutDir)GT4Hooks.elf</NMakeOutput>
+    <NMakeCleanCommandLine>build.bat</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>del /s *.o</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeBuildCommandLine>build.bat</NMakeBuildCommandLine>
+    <NMakeOutput>$(OutDir)GT4Hooks.elf</NMakeOutput>
+    <NMakeCleanCommandLine>build.bat</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>del /s *.o</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeBuildCommandLine>build.bat</NMakeBuildCommandLine>
+    <NMakeOutput>$(OutDir)GT4Hooks.elf</NMakeOutput>
+    <NMakeCleanCommandLine>build.bat</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>del /s *.o</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

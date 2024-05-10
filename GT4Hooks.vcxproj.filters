@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="source\main.c" />
+    <ClCompile Include="source\gt4\Adhoc\Decl.c">
+      <Filter>gt4\Adhoc</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\Adhoc\MMyModule.c">
+      <Filter>gt4\Adhoc</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\String.c">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\MStorage.c">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\Monitor.c">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\MCarGarage.c">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\IO.c">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\Adhoc.c">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\Utils\String.c">
+      <Filter>gt4\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\Adhoc.c">
+      <Filter>gt4</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\CameraSys.c">
+      <Filter>gt4</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\FileDevice.c">
+      <Filter>gt4</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\HostFs.c">
+      <Filter>gt4</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\HOutput.c">
+      <Filter>gt4</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ps2\Memory.c">
+      <Filter>gt4</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\PolyphonyGL.c">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\MStorage.c">
+      <Filter>gt4</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\MCarGarage.c">
+      <Filter>gt4</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\FontManagerClass.c">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gt4\GameFunctions\Misc.c">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\gt4\Adhoc\Decl.h">
+      <Filter>gt4\Adhoc</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\Adhoc\MMyModule.h">
+      <Filter>gt4\Adhoc</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\Enums\Enums.h">
+      <Filter>gt4\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\Enums\SceEnums.h">
+      <Filter>gt4\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\String.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\Monitor.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\CameraSys.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\IO.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\HOutput.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\FileDevice.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\Adhoc.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameStructs\Adhoc.h">
+      <Filter>gt4\GameStructs</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameStructs\FileDevice.h">
+      <Filter>gt4\GameStructs</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameStructs\SceStructs.h">
+      <Filter>gt4\GameStructs</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\Utils\String.h">
+      <Filter>gt4\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\Adhoc.h">
+      <Filter>gt4</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\CameraSys.h">
+      <Filter>gt4</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\HostFs.h">
+      <Filter>gt4</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\HOutput.h">
+      <Filter>gt4</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\MCarGarage.h">
+      <Filter>gt4</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ps2\Memory.h">
+      <Filter>gt4</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\PolyphonyGL.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\MStorage.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\MStorage.h">
+      <Filter>gt4</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\MCarGarage.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\FontManagerClass.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameFunctions\Misc.h">
+      <Filter>gt4\GameFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameStructs\FontManagerClass.h">
+      <Filter>gt4\GameStructs</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gt4\GameStructs\PolyphonyGL.h">
+      <Filter>gt4\GameStructs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="gt4">
+      <UniqueIdentifier>{3d86af98-bd80-4f61-9d71-9e9b06634e9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gt4\Adhoc">
+      <UniqueIdentifier>{cd75ea09-2e37-4db4-9219-2040aeba78de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gt4\Enums">
+      <UniqueIdentifier>{fde9f15d-c56a-4355-b0c1-ffed6f3ad070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gt4\GameFunctions">
+      <UniqueIdentifier>{6ccd9f25-989e-4c3c-9d8e-5d5e3fcb6465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ps2">
+      <UniqueIdentifier>{3cc13780-0f55-4ffd-831e-ba736dc9db4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gt4\GameStructs">
+      <UniqueIdentifier>{db29e789-2056-4a88-a3eb-85b6c65caa9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gt4\Utils">
+      <UniqueIdentifier>{522fe3d6-09d2-4d74-8933-84e591fe7ac2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

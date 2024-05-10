@@ -32,7 +32,7 @@ void PATCH_SHORT(unsigned int addr, short data)
 
 void HOOK_FUNC_ADDR(void* func_start_addr, void* func)
 {
-    *((int*)func_start_addr) = func;
+    *((int*)func_start_addr) = (int)func;
 }
 
 void HOOK(unsigned int func_start_addr, void* func)
@@ -40,3 +40,34 @@ void HOOK(unsigned int func_start_addr, void* func)
     MAKE_JMP(func_start_addr, func);
     NOP(func_start_addr + 4); // Avoid cases where branch delay slot screw the stack up
 }
+
+/*
+typedef struct Hook
+{
+	void* OrigFuncAddress;
+	void* NewFuncAddress;
+	unsigned int HookLength;
+	unsigned int OriginalBytes[];
+} Hook;
+
+Hook HOOKS_Create(unsigned int addr, void* func)
+{
+	Hook hook =
+	{
+		.Address = addr,
+		.NewFunc = func,
+		.HookLength = 4,
+		.OriginalBytes = *(int*)addr
+	};
+
+	MAKE_JAL(addr, func);
+}
+
+void HOOKS_CallOriginal(Hook* hook)
+{
+	for (int i = 0; i < hook->HookLength / 4; i++)
+		*((int*)hook->OrigFuncAddress + i) = hook->OriginalBytes[i];
+
+	((void(*)())hook->OrigFuncAddress)();
+}
+*/

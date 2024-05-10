@@ -14,29 +14,33 @@ source\gt4\GameFunctions\Adhoc.o \
 source\gt4\GameFunctions\MStorage.o \
 source\gt4\GameFunctions\MCarGarage.o \
 source\gt4\GameFunctions\Monitor.o \
+source\gt4\GameFunctions\PolyphonyGL.o \
 source\gt4\Utils\String.o \
 source\gt4\Adhoc\Decl.o \
 source\gt4\Adhoc\MMyModule.o \
 
+#####################################################
+# GT4 Hooks Configuration
+#####################################################
+
+# Whether to print any host fs messages
 HOSTFS_PRINT = 1
 
 # Whether to print actual file reads. Otherwise just accesses.
 PRINT_HOSTFS_READS = 0
 
-NEWLIB_NANO = 1
-KERNEL_NOPATCH = 1
+USE_DEV_RAM = 0
 
 # So, where do we put the new code?
+# We need to our code in an area of memory that seems safe enough and won't be read from other places.
 
 # Initially I wanted to put my code before 0x100000, which is the image base for GT4O.
 # Setting it to 0x80000 crashes when the hook gets past 0x82000... 
 
-# The game creates pool/generic allocator (func 0x5225B0) before starting from 0x8D0FB0, size 0x1FF8000 (32mb?) before 
+# The game creates pool/generic allocator (func 0x5225B0) from 0x8D0FB0 (start of .bss), size 0x1FF8000 (32mb?) before 
 # main is called. It'll be memset'd to 0 entirely
-
-# We wipe the memset call. main.c should be doing this.
+# We wipe the memset call just incase we ever need to put stuff in it. main.c should be doing this.
 # They probably did this for hot-reloading, which is not supported here.
-# Then, put our code in an area of memory that seems safe enough.
 
 BASE_ADDRESS = 0x68A480
 # ^^^^^^^^^^^^^^^^^^^^^^
@@ -50,6 +54,10 @@ BASE_ADDRESS = 0x68A480
 # This is ok to override, this is not used in GT4O.
 # Goes from 0x68A480 to 0x69A790. Plenty of space. (0x10310)
 
+#####################################################
+
+NEWLIB_NANO = 1
+KERNEL_NOPATCH = 1
 
 EE_LINKFILE = linkfile
 

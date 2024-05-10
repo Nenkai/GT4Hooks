@@ -23,7 +23,7 @@ hClass* (*classIds[])() = {
 void ADHOC_InjectNewModules()
 {
     // Base modules are always added in engine, new modules needs to be added
-    // though InitializeAdhocMenu, init_menu and init_gt4app callbacks to hADHOC::addModuleHandle
+    // though InitializeAdhocMenu. init_menu and init_gt4app callbacks to hADHOC::addModuleHandle
     // Override the last defineClass to register the original class that was going to be registed, and our additional ones
     MAKE_JAL(0x121D58, &HOOK_defineMoreClasses);
 
